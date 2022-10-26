@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
 </head>
 <body>
     <script>
@@ -39,17 +44,49 @@
 
 //Um vetor com o total de vendas por produto
 
+totalSellsArray = produtos.map((item) => {return item.preco * item.quantidade});
+
 //O total de vendas
+
+totalSells = totalSellsArray.reduce((result, item) => {return result + item}, 0)
 
 //O total de vendas de TV
 
+totalSellsTV = produtos.filter((item) => {return item.nome == 'TV'}).reduce((result, item) => {return result + item.quantidade}, 0);
+
 //O total de vendas da LG + Sangsung
+
+TotalSellsLGSam = produtos.filter((item) => {return item.fornecedor == 'LG' || item.fornecedor == 'Sansung'}).reduce((result, item) => {return result + item.quantidade}, 0);
+
+// TotalSellsLGSam = produtos.filter((item) => { return item.fornecedor !== 'Gradiente' }).reduce((result, item) => { return result + item.quantidade }, 0);
 
 //Um vetor de objetos mostrando todos os preços com 20% de desconto
 
+let produtosRe20 = [];
+
+for (i = 0; i < produtos.length; i++){
+    produtosRe20[i] = Object.assign({}, produtos[i]);
+}
+
+let produtosDes20 = produtosRe20.map((item) => {
+    item.preco = item.preco * 0.8;
+    return item;
+});
+
+// produtosRe20.forEach((item) => {
+//     item.preco = item.preco * 0.8;
+// })
+
+
 //Qual seria o total de vendas após o desconto de 20%
 
+totalSellsArrayDes20 = produtosDes20.map((item) => { return item.preco * item.quantidade });
+
 //Qual o preço mais caro para TVs
+
+TVs = produtos.filter((item) => {
+    return item.nome === 'TV';
+})
 
 //Mostrar todas informações da TV mais barata
 
